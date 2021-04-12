@@ -1,3 +1,3 @@
-const descriptors = ["Forest", "Ancient", "Cascade", "Maple"];
+module.exports.descriptors = ["Forest", "Ancient", "Cascade", "Maple"];
 
-const places = ["Flats", "Village", "City", "Pond", "Canyon"];
+module.exports.places = ["Flats", "Village", "City", "Pond", "Canyon"];

@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const cities = require("./cities.js");
+const { places, descriptors } = require("./seedHelpers");
 const HikingPlace = require("../models/hikers");
 
 mongoose.connect("mongodb://localhost:27017/hikers", {
@@ -13,10 +15,22 @@ db.once("open", () => {
   console.log("Database connected");
 });
 
+const sample = (array) => array[Math.floor(Math.random() * array.length)];
+
 const seedDB = async () => {
   await HikingPlace.deleteMany({});
-  const c = new HikingPlace({ title: "new" });
-  await c.save();
+  for (let i = 0; i < 3; i++) {
+    //loop 50 places
+    const random1000 = Math.floor(Math.random() * 3); //from random 1k
+    const camp = new HikingPlace({
+      //set location
+      location: ` ${cities[random1000].city} ,${cities[random1000].state}`,
+      title: `${sample(descriptors)} ${sample(places)}`,
+    });
+    await camp.save();
+  }
 };
 
-seedDB();
+seedDB().then(() => {
+  mongoose.connection.close();
+});

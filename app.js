@@ -23,6 +23,12 @@ app.set("views", path.join(__dirname, "views"));
 app.get("/", (req, res) => {
   res.render("home");
 });
+
+app.get("/hiking-places", async (req, res) => {
+  const hikingPlaces = await HikingPlace.find({});
+  res.render("hiking-places/index"); //pass to template
+});
+
 app.get("/add-hiking-place", async (req, res) => {
   const hike = new HikingPlace({ title: "My Garden", location: "Paris" });
   await hike.save();

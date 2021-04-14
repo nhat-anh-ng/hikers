@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Hiking Place</title>
+</head>
+<body>
+    <form action="/hiking-places" method="POST">
+        <div>
+            <label for="title">Title</label>
+            <!--multiple hikingPlaces title, to group content together. Everything sotred in the body'll be stored under name -->
+            <input type="text" id="title" name="hikingPlace[title]"> 
+        </div>
+        <div>
+            <label for="location">location</label>
+            <!--multiple hikingPlaces title, to group content together -->
+            <input type="text" id="location" name="hikingPlace[location]">
+        </div>
+        <button>Add New Hiking Place !</button>
+    </form>
+    <a href="/hiking-places">All Hiking Places</a>
+</body>
+</html>

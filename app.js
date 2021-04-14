@@ -26,15 +26,14 @@ app.get("/", (req, res) => {
 
 app.get("/hiking-places", async (req, res) => {
   const hikingPlaces = await HikingPlace.find({});
-  res.render("hiking-places/index"); //pass to template
+  res.render("hiking-places/index", { hikingPlaces }); //pass to template
 });
 
-app.get("/add-hiking-place", async (req, res) => {
-  const hike = new HikingPlace({ title: "My Garden", location: "Paris" });
-  await hike.save();
-  res.send(hike);
-});
+app.get("/hiking-places/:id", async (req, res) => {
+  const hikingPlace = await HikingPlace.findById(req.params.id);
+  res.render("hiking-places/show", { hikingPlace }); //take id and look up corresponding place
+}); //id to look up corresponding hiking place from data
 
-app.listen(5000, () => {
+app.listen(3000, () => {
   console.log("port 3000 serving");
 });

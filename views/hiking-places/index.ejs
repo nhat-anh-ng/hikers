@@ -8,5 +8,11 @@
 </head>
 <body>
     <h1>Hiking Places</h1>
+    <!--display title for each hiking place-->
+    <ul>
+        <% for (let hikingPlace of hikingPlaces) {%>
+            <li> <a href="/hiking-places/<%= hikingPlace._id %> "><%= hikingPlace.title %></a></li>
+        <% } %>
+    </ul>
 </body>
 </html>

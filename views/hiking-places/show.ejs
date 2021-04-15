@@ -14,6 +14,10 @@
         <div>
             <a href="/hiking-places/<%=hikingPlace._id%>/edit">Edit</a>
         </div>
+
+        <form action="/hiking-places/<%=hikingPlace._id%>?_method=DELETE" method="POST">
+            <button>Delete</button>
+        </form>
        
         <a href="/hiking-places">All Hiking Places</a>
     </footer>

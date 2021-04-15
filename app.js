@@ -61,6 +61,12 @@ app.put("/hiking-places/:id", async (req, res) => {
   res.redirect(`/hiking-places/${hikingPlace._id}`);
 });
 
+app.delete("/hiking-places/:id", async (req, res) => {
+  const { id } = req.params;
+  await HikingPlace.findByIdAndDelete(id);
+  res.redirect("/hiking-places");
+});
+
 app.listen(3000, () => {
   console.log("port 3000 serving");
 });

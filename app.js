@@ -54,7 +54,11 @@ app.get("/hiking-places/:id/edit", async (req, res) => {
 });
 
 app.put("/hiking-places/:id", async (req, res) => {
-  res.send("It worked!");
+  const { id } = req.params;
+  const hikingPlace = await HikingPlace.findByIdAndUpdate(id, {
+    ...req.body.hikingPlace,
+  }); //...take what's in body not hardcode data, spread to the object
+  res.redirect(`/hiking-places/${hikingPlace._id}`);
 });
 
 app.listen(3000, () => {

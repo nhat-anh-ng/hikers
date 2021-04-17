@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hiking Places</title>
-</head>
-<body>
+<% layout('layouts/Boilerplate') %>
     <h1>All Hiking Places</h1>
     <div>
         <a href="/hiking-places/new">Add New Hiking Place !</a>
@@ -17,5 +9,3 @@
             <li> <a href="/hiking-places/<%= hikingPlace._id %> "><%= hikingPlace.title %></a></li>
         <% } %>
     </ul>
-</body>
-</html>

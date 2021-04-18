@@ -1,16 +1,34 @@
 <% layout('layouts/boilerplate')%>
-    <h1>Edit Hiking Place</h1>
-    <form action="/hiking-places/<%=hikingPlace._id%>?_method=PUT" method="POST">
-        <div>
-            <label for="title">Title</label>
-            <!--multiple hikingPlaces title, to group content together. Everything sotred in the body'll be stored under name -->
-            <input type="text" id="title" name="hikingPlace[title]" value="<%= hikingPlace.title%>">
+   
+    <div class="row">
+        <h1 class="text-center">Edit Spot</h1>
+        <div class="col-6 offset-3">
+            <form action="/hiking-places/<%=hikingPlace._id%>?_method=PUT" method="POST">
+                <div class="mb-3">
+                    <label class="form-label" for="title">Title</label>
+                    <!--multiple hikingPlaces title, to group content together. Everything sotred in the body'll be stored under name -->
+                    <input class="form-control" type="text" id="title" name="hikingPlace[title]" value="<%= hikingPlace.title%>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="location">location</label>
+                    <!--multiple hikingPlaces title, to group content together -->
+                    <input class="form-control" type="text" id="location" name="hikingPlace[location]" value="<%= hikingPlace.location%>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="image">TikTok URL</label>
+                    <!--multiple hikingPlaces title, to group content together -->
+                    <input class="form-control" type="text" id="image" name="hikingPlace[image]" value="<%= hikingPlace.image%>">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label" for="description">Description</label>
+                    <!--multiple hikingPlaces title, to group content together -->
+                    <textarea class="form-control" type="text" id="description" name="hikingPlace[description]" value="<%= hikingPlace.description%>"></textarea>
+                </div>
+                <div class="mb-3">
+                    <button class="btn btn-success">Update TikTok Spot!</button>
+                </div>
+    
+            </form>
+            <a href="/hiking-places/<%= hikingPlace._id%>">Back to Hiking Places</a>
         </div>
-        <div>
-            <label for="location">location</label>
-            <!--multiple hikingPlaces title, to group content together -->
-            <input type="text" id="location" name="hikingPlace[location]" value="<%= hikingPlace.location%>">
-        </div>
-        <button>Update Hiking Place !</button>
-    </form>
-    <a href="/hiking-places/<%= hikingPlace._id%>">Back to Hiking Places</a>
+    </div>

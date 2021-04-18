@@ -1,17 +1,25 @@
 <% layout('layouts/boilerplate')%>
-    <h1> <%= hikingPlace.title %> </h1>
-    <h2> <%= hikingPlace.location %> </h2>
-
-  
-  <p><%= hikingPlace.description %></p>
-<img src="<%= hikingPlace.image %>" >
-        <div>
-            <a href="/hiking-places/<%=hikingPlace._id%>/edit">Edit</a>
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <img class="card-img-top" src="<%= hikingPlace.image %>" alt="">
+            <div class="card-body">
+                <h5 class="card-title"><%= hikingPlace.title %></h5>
+                <p class="card-text"><%= hikingPlace.description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-muted"><%= hikingPlace.location %></li>
+            </ul>
+            <div class="card-body">
+                <a class="card-link btn btn-warning" href="/hiking-places/<%=hikingPlace._id%>/edit">Edit</a>
+                <form class="d-inline" action="/hiking-places/<%=hikingPlace._id%>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+            <div class="card-footer text-muted">
+                <a href="/hiking-places">All Places</a>
+            </div>
         </div>
+    </div>
+</div>
 
-        <form action="/hiking-places/<%=hikingPlace._id%>?_method=DELETE" method="POST">
-            <button>Delete</button>
-        </form>
-    <footer>
-        <a href="/hiking-places">All Hiking Places</a>
-    </footer>

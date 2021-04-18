@@ -4,8 +4,24 @@
         <a href="/hiking-places/new">Add New Hiking Place !</a>
     </div>
     <!--display title for each hiking place-->
-    <ul>
+
         <% for (let hikingPlace of hikingPlaces) {%>
-            <li> <a href="/hiking-places/<%= hikingPlace._id %> "><%= hikingPlace.title %></a></li>
+           <div class="card mb-3">
+               <div class="row">
+                    <div class="col-md-4">
+                        <img class="img-fluid" src="<%= hikingPlace.image %>">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= hikingPlace.title %></h5>
+                            <p class="card-text"><%= hikingPlace.description %></p>
+                            <p class="card-text">
+                                <small class="text-muted"><%= hikingPlace.location %></small>
+                            </p>
+                            <a href="/hiking-places/<%= hikingPlace._id %>" class="btn btn-primary">View <%= hikingPlace.title %></a>
+                        </div>
+                    </div>
+               </div>
+           </div>
         <% } %>
-    </ul>
+

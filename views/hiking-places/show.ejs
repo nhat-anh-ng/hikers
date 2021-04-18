@@ -2,7 +2,9 @@
     <h1> <%= hikingPlace.title %> </h1>
     <h2> <%= hikingPlace.location %> </h2>
 
-    <footer>
+  
+  <p><%= hikingPlace.description %></p>
+<img src="<%= hikingPlace.image %>" >
         <div>
             <a href="/hiking-places/<%=hikingPlace._id%>/edit">Edit</a>
         </div>
@@ -10,6 +12,6 @@
         <form action="/hiking-places/<%=hikingPlace._id%>?_method=DELETE" method="POST">
             <button>Delete</button>
         </form>
-       
+    <footer>
         <a href="/hiking-places">All Hiking Places</a>
     </footer>

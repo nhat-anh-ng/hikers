@@ -2,21 +2,22 @@
     <div class="row">
         <h1 class="text-center">New Hiking Place</h1>
         <div class="col-6 offset-3">
-            <form action="/hiking-places" method="POST">
+            <form action="/hiking-places" method="POST" novalidate class="validated-form">
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
                     <!--multiple hikingPlaces title, to group content together. Everything sotred in the body'll be stored under name -->
-                    <input  class="form-control" type="text" id="title" name="hikingPlace[title]">
+                    <input required class="form-control" type="text" id="title" name="hikingPlace[title]" >
+                    <div class="valid-feedback">Done</div>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="location">location</label>
                     <!--multiple hikingPlaces title, to group content together -->
-                    <input class="form-control" type="text" id="location" name="hikingPlace[location]">
+                    <input class="form-control" type="text" id="location" name="hikingPlace[location]" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image">TikTok URL</label>
                     <!--multiple hikingPlaces title, to group content together -->
-                    <input class="form-control" type="text" id="image" name="hikingPlace[image]">
+                    <input class="form-control" type="text" id="image" name="hikingPlace[image]" >
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="description">Description</label>

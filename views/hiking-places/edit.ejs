@@ -3,16 +3,16 @@
     <div class="row">
         <h1 class="text-center">Edit Spot</h1>
         <div class="col-6 offset-3">
-            <form action="/hiking-places/<%=hikingPlace._id%>?_method=PUT" method="POST">
+            <form action="/hiking-places/<%=hikingPlace._id%>?_method=PUT" method="POST" novalidate class="validated-form">
                 <div class="mb-3">
                     <label class="form-label" for="title">Title</label>
                     <!--multiple hikingPlaces title, to group content together. Everything sotred in the body'll be stored under name -->
-                    <input class="form-control" type="text" id="title" name="hikingPlace[title]" value="<%= hikingPlace.title%>">
+                    <input required class="form-control" type="text" id="title" name="hikingPlace[title]" value="<%= hikingPlace.title%>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="location">location</label>
                     <!--multiple hikingPlaces title, to group content together -->
-                    <input class="form-control" type="text" id="location" name="hikingPlace[location]" value="<%= hikingPlace.location%>">
+                    <input required class="form-control" type="text" id="location" name="hikingPlace[location]" value="<%= hikingPlace.location%>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label" for="image">TikTok URL</label>

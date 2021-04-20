@@ -2,8 +2,11 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
+const { reviewSchema } = require("./schemas.js");
+const catchAsync = require("./utils/catchAsync");
 const methodOverride = require("method-override"); //to fake a request
 const HikingPlace = require("./models/hikers");
+const Review = require("./models/review");
 
 mongoose.connect("mongodb://localhost:27017/hikers", {
   useNewUrlParser: true,
@@ -25,6 +28,17 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true })); // tell express to parse the body
 app.use(methodOverride("_method")); //query string used in edit.ejs
+
+const validateReview = (req, res, next) => {
+  //create middleware
+  const { error } = reviewSchema.validate(req.body);
+  if (error) {
+    const msg = error.details.map((el) => el.message);
+    throw new ExpressError(msg, 400);
+  } else {
+    next();
+  }
+};
 
 app.get("/", (req, res) => {
   res.render("home");
@@ -68,6 +82,19 @@ app.delete("/hiking-places/:id", async (req, res) => {
   await HikingPlace.findByIdAndDelete(id);
   res.redirect("/hiking-places");
 });
+
+app.post(
+  "/hiking-places/:id/reviews",
+  validateReview,
+  catchAsync(async (req, res) => {
+    const hikingPlace = await HikingPlace.findById(req.params.id);
+    const review = new Review(req.body.review);
+    hikingPlace.reviews.push(review); // from hikers.js
+    await review.save();
+    await hikingPlace.save();
+    res.redirect(`/hiking-places/${hikingPlace._id}`);
+  })
+);
 
 app.listen(3000, () => {
   console.log("port 3000 serving");

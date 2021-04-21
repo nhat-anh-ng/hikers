@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
 const ejsMate = require("ejs-mate");
-const Joi = require("joi");
 const { reviewSchema } = require("./schemas.js");
 const catchAsync = require("./utils/catchAsync");
 const methodOverride = require("method-override"); //to fake a request
@@ -54,26 +53,16 @@ app.get("/hiking-places/new", (req, res) => {
   res.render("hiking-places/new");
 });
 
-app.post(
-  "/hiking-places",
-  catchAsync(async (req, res, next) => {
-    const hikingPlaceSchema = Joi.object({
-      campground: Joi.object({
-        title: Joi.string().required(),
-        price: Joi.number().required().min(0),
-      }).required(),
-    });
-    const result = hikingPlaceSchema.validate(req.body);
-    const hikingPlace = new HikingPlace(req.body.hikingPlace);
-    await hikingPlace.save();
-    res.redirect(`/hiking-places/${hikingPlace._id}`);
-  })
-);
+app.post("/hiking-places", async (req, res) => {
+  const hikingPlace = new HikingPlace(req.body.hikingPlace);
+  await hikingPlace.save();
+  res.redirect(`/hiking-places/${hikingPlace._id}`);
+});
 
 app.get(
   "/hiking-places/:id",
   catchAsync(async (req, res) => {
-    const hikingPlace = await HikingPlace.findById(req.params.id).populated(
+    const hikingPlace = await HikingPlace.findById(req.params.id).populate(
       "reviews"
     );
     res.render("hiking-places/show", { hikingPlace }); //take id and look up corresponding place
@@ -109,6 +98,16 @@ app.post(
     await review.save();
     await hikingPlace.save();
     res.redirect(`/hiking-places/${hikingPlace._id}`);
+  })
+);
+
+app.delete(
+  "/hiking-places/:id/reviews/:reviewId",
+  catchAsync(async (req, res) => {
+    const { id, reviewId } = req.params;
+    await HikingPlace.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/hiking-places/${id}`);
   })
 );
 
